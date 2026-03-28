@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zentrix App</title>
+
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:#fff;
+}
+
+/* SECTION */
+.section{display:none;padding:15px;}
+.active{display:block;}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+padding:15px;
+border-radius:15px;
+margin-top:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:none;
+margin-top:10px;
+background:#1e293b;
+color:white;
+}
+
+/* BUTTON */
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#6366f1,#8b5cf6);
+color:white;
+font-weight:bold;
+}
+
+/* PROFILE */
+.profile{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.profile img{
+width:60px;
+height:60px;
+border-radius:50%;
+border:2px solid #6366f1;
+}
+
+/* LOGO */
+.logo{
+width:70px;
+margin:auto;
+display:block;
+}
+
+/* NAV */
+.nav{
+position:fixed;
+bottom:0;
+width:100%;
+background:#1e293b;
+display:flex;
+justify-content:space-around;
+padding:10px;
+}
+
+.nav button{
+background:none;
+font-size:18px;
+color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="section active">
+
+<div class="card">
+
+<img src="https://i.imgur.com/8Km9tLL.png" class="logo">
+
+<h3 style="text-align:center;">Karibu Zentrix 🚀</h3>
+
+<input id="name" placeholder="Ingiza jina lako">
+
+<button onclick="login()">🚀 Ingia</button>
+
+</div>
+
+</div>
+
+<!-- HOME -->
+<div id="home" class="section">
+
+<div class="card profile">
+<img src="https://i.pravatar.cc/100" id="profilePic">
+<div>
+<h3 id="welcome"></h3>
+<p style="font-size:12px;opacity:0.6;">Zentrix Member</p>
+</div>
+</div>
+
+<div class="card">
+<h4>👥 Wanachama</h4>
+<p id="userCount">0</p>
+</div>
+
+<div class="card">
+<h4>📚 Courses</h4>
+<button onclick="openCourse('graphics')">🎨 Jifunze Graphics</button>
+<button onclick="openCourse('business')">📊 Jifunze Biashara</button>
+</div>
+
+<div class="card">
+<h4>📢 Tangaza</h4>
+<button onclick="show('ads')">Weka Tangazo</button>
+</div>
+
+</div>
+
+<!-- COURSE -->
+<div id="course" class="section">
+
+<div class="card">
+<h3 id="courseTitle"></h3>
+
+<iframe width="100%" height="200"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ">
+</iframe>
+
+<p id="courseDesc"></p>
+</div>
+
+<button onclick="back()">⬅ Rudi</button>
+
+</div>
+
+<!-- ADS -->
+<div id="ads" class="section">
+
+<div class="card">
+<h3>📢 Tangaza Video</h3>
+
+<input id="adLink" placeholder="Weka link ya video">
+
+<button onclick="submitAd()">Tuma</button>
+
+<p style="font-size:12px;">Lipia: 0795191608</p>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+<button onclick="show('home')">🏠</button>
+<button onclick="show('course')">📚</button>
+<button onclick="show('ads')">📢</button>
+</div>
+
+<script>
+
+/* NAV */
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+/* LOGIN */
+function login(){
+
+if(!name.value){
+alert("Weka jina kwanza");
+return;
+}
+
+localStorage.setItem("userName",name.value);
+
+let count = localStorage.getItem("usersCount") || 0;
+count++;
+localStorage.setItem("usersCount", count);
+
+loadUser();
+show('home');
+}
+
+/* LOAD USER */
+function loadUser(){
+let user = localStorage.getItem("userName");
+
+welcome.innerText="Karibu "+user+" 👋";
+
+let count = localStorage.getItem("usersCount") || 0;
+userCount.innerText=count;
+}
+
+/* AUTO LOGIN */
+if(localStorage.getItem("userName")){
+loadUser();
+show('home');
+}
+
+/* COURSE */
+function openCourse(type){
+show('course');
+
+if(type==="graphics"){
+courseTitle.innerText="🎨 Graphics Design";
+courseDesc.innerText="Jifunze Photoshop hadi uwe pro.";
+}
+
+if(type==="business"){
+courseTitle.innerText="📊 Biashara";
+courseDesc.innerText="Jifunze biashara step by step.";
+}
+}
+
+function back(){show('home');}
+
+/* ADS */
+function submitAd(){
+alert("Tangazo limepokelewa ✔");
+}
+
+</script>
+
+</body>
+  </html>
