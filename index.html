@@ -16,182 +16,175 @@
             --success: #10b981;
             --text: #ffffff;
             --text-dim: #9ca3af;
+            --danger: #ef4444;
         }
 
-        body { margin: 0; font-family: 'Poppins', sans-serif; background-color: var(--bg); color: var(--text); padding-bottom: 20px; transition: 0.3s; }
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            padding-bottom: 20px; 
+            overflow-x: hidden;
+        }
 
-        /* SIDEBAR (MISTARI 3) */
-        .sidebar { position: fixed; left: -260px; top: 0; width: 260px; height: 100%; background: var(--card); transition: 0.4s; z-index: 1000; padding: 20px; box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        /* OVERLAY - Inazuia kubofya nje wakati sidebar ipo wazi */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 998;
+            backdrop-filter: blur(3px);
+        }
+
+        /* SIDEBAR */
+        .sidebar { 
+            position: fixed; 
+            left: -280px; 
+            top: 0; 
+            width: 260px; 
+            height: 100%; 
+            background: var(--card); 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            z-index: 1000; 
+            padding: 25px; 
+            box-shadow: 10px 0 30px rgba(0,0,0,0.5); 
+        }
         .sidebar.open { left: 0; }
-        .sidebar-item { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; display: flex; align-items: center; gap: 12px; font-size: 14px; }
-        .sidebar-item:hover { background: rgba(255,255,255,0.05); }
+        .sidebar-item { 
+            padding: 15px; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-size: 14px; 
+            border-radius: 8px;
+            transition: 0.2s;
+        }
+        .sidebar-item:hover { background: rgba(255,255,255,0.1); color: var(--accent); }
 
         /* HEADER */
-        header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: var(--card); position: sticky; top: 0; z-index: 900; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .lang-switch { background: var(--primary); color: white; border: none; padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        header { 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: var(--card); 
+            position: sticky; 
+            top: 0; 
+            z-index: 900; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+        }
+        .lang-switch { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 6px 15px; 
+            border-radius: 20px; 
+            font-size: 12px; 
+            cursor: pointer; 
+            font-weight: 600;
+        }
 
         /* SECTIONS */
-        .section { display: none; padding: 15px; animation: slideUp 0.5s ease; }
+        .section { display: none; padding: 20px; animation: slideUp 0.4s ease-out; }
         .active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* FEED (KAMA INSTAGRAM/FACEBOOK) */
-        .card { background: var(--card); border-radius: 20px; padding: 15px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        .post-img { width: 100%; height: 200px; border-radius: 15px; object-fit: cover; margin-bottom: 12px; }
-        .social-bar { display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px; }
-        .social-item { cursor: pointer; font-size: 14px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
+        /* FEED & CARDS */
+        .card { 
+            background: var(--card); 
+            border-radius: 20px; 
+            padding: 15px; 
+            margin-bottom: 25px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .post-img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 250px; 
+            border-radius: 15px; 
+            object-fit: cover; 
+            margin-bottom: 15px; 
+        }
+        .social-bar { 
+            display: flex; 
+            justify-content: space-around; 
+            padding-top: 15px; 
+            border-top: 1px solid rgba(255,255,255,0.05); 
+            margin-top: 10px; 
+        }
+        .social-item { cursor: pointer; font-size: 13px; color: var(--text-dim); display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+        .social-item:hover { color: var(--primary); }
 
         /* INPUTS & BUTTONS */
-        .input-box { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white; margin-bottom: 15px; box-sizing: border-box; }
-        .btn { width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .input-box { 
+            width: 100%; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(0,0,0,0.3); 
+            color: white; 
+            margin-bottom: 15px; 
+            box-sizing: border-box; 
+            font-family: inherit;
+        }
+        .input-box:focus { border-color: var(--primary); outline: none; }
+        
+        .btn { 
+            width: 100%; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: none; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 10px; 
+            font-size: 15px;
+        }
         .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:active { transform: scale(0.98); }
         .btn-wa { background: #25d366; color: white; margin-top: 10px; text-decoration: none; }
 
         /* ADS */
-        .ad-banner { background: linear-gradient(45deg, #1e3a8a, #312e81); padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--accent); }
+        .ad-banner { 
+            background: linear-gradient(135deg, #1e3a8a, #312e81); 
+            padding: 20px; 
+            border-radius: 18px; 
+            margin-bottom: 25px; 
+            border: 1px solid var(--accent); 
+            position: relative;
+        }
 
         /* LOGO */
-        .logo-box { width: 50px; height: 50px; background: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3); }
+        .logo-box { 
+            width: 60px; 
+            height: 60px; 
+            background: var(--primary); 
+            border-radius: 15px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: bold; 
+            font-size: 28px; 
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4); 
+        }
+
+        h2, h3, h4 { margin-top: 0; }
     </style>
 </head>
 <body>
 
+    <div id="overlay" onclick="toggleSidebar()"></div>
+
     <div id="sidebar" class="sidebar">
         <h2 style="color:var(--accent)">Zentrix<span style="color:white">App</span></h2>
-        <div class="sidebar-item" onclick="show('home')"><i class="fas fa-home"></i> <span class="tr" data-en="Home Feed" data-sw="Masomo Mapya">Home Feed</span></div>
-        <div class="sidebar-item" onclick="show('courses')"><i class="fas fa-graduation-cap"></i> <span class="tr" data-en="Our Courses" data-sw="Masomo Yetu">Our Courses</span></div>
-        <div class="sidebar-item" onclick="show('admin_panel')"><i class="fas fa-user-shield"></i> <span class="tr" data-en="Admin Dashboard" data-sw="Ukurasa wa Admin">Admin Dashboard</span></div>
-        <div class="sidebar-item" onclick="window.open('https://wa.me/255XXXXXXXXX')"><i class="fab fa-whatsapp"></i> <span class="tr" data-en="Chat with Ezra" data-sw="Chat na Ezra">Chat with Ezra</span></div>
-        <div class="sidebar-item" onclick="logout()" style="color:#ef4444; margin-top: 50px;"><i class="fas fa-sign-out-alt"></i> <span class="tr" data-en="Logout" data-sw="Ondoka">Ondoka</span></div>
-    </div>
-
-    <header id="mainHeader" style="display:none;">
-        <i class="fas fa-bars" style="font-size: 20px;" onclick="toggleSidebar()"></i>
-        <div style="font-weight: 600; font-size: 18px;">Zentrix<span style="color:var(--accent)">App</span></div>
-        <button class="lang-switch" onclick="toggleLanguage()" id="langBtn">Kiswahili</button>
-    </header>
-
-    <div id="auth" class="section active">
-        <div style="text-align:center; padding: 40px 20px;">
-            <div class="logo-box" style="margin: 0 auto 20px;">Z</div>
-            <h2 class="tr" data-en="Sign In" data-sw="Ingia">Sign In</h2>
-            <p class="tr" data-en="Learn Graphics and Maintenance from Experts." data-sw="Jifunze Graphics na Ufundi kutoka kwa wataalam.">Learn Graphics and Maintenance from Experts.</p>
-            
-            <div style="margin-top: 30px;">
-                <input type="text" id="username" class="input-box" placeholder="Username">
-                <input type="password" id="password" class="input-box" placeholder="Password">
-                <button class="btn btn-primary" onclick="login()"><span class="tr" data-en="Get Started" data-sw="Anza Sasa">Get Started</span></button>
-                <p style="font-size: 13px; margin-top: 20px; color: var(--text-dim);" class="tr" data-en="New here? Create account." data-sw="Mgeni? Fungua akaunti mpya.">New here? Create account.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="verify" class="section">
-        <div style="text-align:center; padding: 40px 20px;">
-            <i class="fas fa-lock" style="font-size: 50px; color: var(--accent); margin-bottom: 20px;"></i>
-            <h3 class="tr" data-en="Verify Your Account" data-sw="Thibitisha Akaunti">Thibitisha Akaunti</h3>
-            <p class="tr" data-en="To start lessons, please enter the code sent to you after payment." data-sw="Ili kuanza masomo, tafadhali weka kodi uliyotumiwa baada ya malipo.">To start lessons, please enter the code sent to you after payment.</p>
-            
-            <input type="text" id="vcode" class="input-box" style="text-align:center; font-size: 20px; letter-spacing: 5px;" placeholder="XXXXXX">
-            <button class="btn btn-primary" onclick="checkVCode()"><span class="tr" data-en="Verify Now" data-sw="Thibitisha Sasa">Verify Now</span></button>
-            <a href="https://wa.me/255XXXXXXXXX" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Chat with Admin for Code</a>
-        </div>
-    </div>
-
-    <div id="home" class="section">
-        <div class="ad-banner">
-            <small style="background: var(--accent); padding: 2px 5px; border-radius: 4px; color: black; font-weight: bold; font-size: 10px;">AD</small>
-            <h4 style="margin: 5px 0;" class="tr" data-en="Grow Your Business" data-sw="Kuza Biashara Yako">Grow Your Business</h4>
-            <p style="font-size: 12px;" class="tr" data-en="Contact us to feature your ads here." data-sw="Wasiliana nasi kuweka matangazo yako hapa.">Contact us to feature your ads here.</p>
-        </div>
-
-        <div id="posts">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500" class="post-img">
-                <h3 class="tr" data-en="Introduction to Graphic Design" data-sw="Utangulizi wa Graphics Design">Introduction to Graphic Design</h3>
-                <p style="font-size: 13px; color: var(--text-dim);" class="tr" 
-                   data-en="Learn the basics of color theory and layout design."
-                   data-sw="Jifunze misingi ya rangi na mpangilio wa michoro.">
-                   Learn the basics of color theory and layout design.</p>
-                <div class="social-bar">
-                    <div class="social-item"><i class="fas fa-heart"></i> Like</div>
-                    <div class="social-item"><i class="fas fa-comment"></i> Comment</div>
-                    <div class="social-item"><i class="fas fa-share-alt"></i> Share</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="admin_panel" class="section">
-        <div style="background: rgba(37, 99, 235, 0.1); padding: 20px; border-radius: 15px; border: 1px dashed var(--primary);">
-            <h3 class="tr" data-en="Admin: Post Content" data-sw="Admin: Weka Somo">Admin: Post Content</h3>
-            <input type="text" id="postTitle" class="input-box" placeholder="Lesson Title">
-            <textarea id="postDesc" class="input-box" rows="3" placeholder="Description..."></textarea>
-            <input type="text" id="postImg" class="input-box" placeholder="Image URL (Link ya picha)">
-            <button class="btn btn-primary" onclick="createPost()">Publish Post</button>
-        </div>
-    </div>
-
-    <script>
-        let currentLang = 'en';
-
-        function toggleLanguage() {
-            currentLang = (currentLang === 'en') ? 'sw' : 'en';
-            document.querySelectorAll('.tr').forEach(el => {
-                el.innerText = el.getAttribute(`data-${currentLang}`);
-            });
-            document.getElementById('langBtn').innerText = (currentLang === 'en') ? 'Kiswahili' : 'English';
-        }
-
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-
-        function show(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.getElementById('sidebar').classList.remove('open');
-            document.getElementById('mainHeader').style.display = (id === 'auth' || id === 'verify') ? 'none' : 'flex';
-        }
-
-        function login() {
-            // Hapa mwanafunzi anajisajili/anaingia
-            show('verify');
-        }
-
-        function checkVCode() {
-            // Hii ndio kodi unayompa mwanafunzi baada ya kulipia
-            const secretCode = "ZENTRIX2026";
-            if(document.getElementById('vcode').value === secretCode) {
-                show('home');
-            } else {
-                alert("Wrong Verification Code! Contact Admin on WhatsApp.");
-            }
-        }
-
-        function createPost() {
-            let title = document.getElementById('postTitle').value;
-            let desc = document.getElementById('postDesc').value;
-            let img = document.getElementById('postImg').value || 'https://images.unsplash.com/photo-1557683316-973673baf926?w=500';
-
-            let postHTML = `
-                <div class="card">
-                    <img src="${img}" class="post-img">
-                    <h3>${title}</h3>
-                    <p style="font-size: 13px; color: var(--text-dim);">${desc}</p>
-                    <div class="social-bar">
-                        <div class="social-item"><i class="fas fa-heart"></i> Like</div>
-                        <div class="social-item"><i class="fas fa-comment"></i> Comment</div>
-                        <div class="social-item"><i class="fas fa-share-alt"></i> Share</div>
-                    </div>
-                </div>`;
-            document.getElementById('posts').insertAdjacentHTML('afterbegin', postHTML);
-            show('home');
-        }
-
-        function logout() {
-            location.reload();
-        }
-    </script>
-</body>
-</html>
+        <div style="margin-top: 30px;">
+            <div class="sidebar-item" onclick="show('home')"><i class="fas fa-home"></i> <span class="tr" data-en="Home Feed" data-sw="Masomo Mapya">Home Feed</span></div>
+            <div class="sidebar-item" onclick="show('courses')"><i class="fas fa
